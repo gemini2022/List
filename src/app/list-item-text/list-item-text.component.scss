@@ -1,0 +1,11 @@
+.list-item-text {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: var(--list-text-color);
+    font-size: var(--list-font-size);
+    font-family: var(--list-font-family);
+    border: var(--list-selection-border-width) solid transparent;
+    line-height: calc(var(--list-item-height) - ((var(--list-item-padding-top-bottom) * 2) + (var(--list-selection-border-width) * 2)));
+    padding: var(--list-item-padding-top-bottom) 0 var(--list-item-padding-top-bottom) calc(var(--list-indent) - var(--list-selection-border-width));
+}
