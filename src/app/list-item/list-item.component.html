@@ -1,11 +1,7 @@
-<div #htmlElement
-     tabindex="-1"
+<div tabindex="-1"
      class="list-item"
-     (mousedown)="onItemDown()"
      (contextmenu)="$event.preventDefault()"
-     [ngClass]="{'list-primary-selection': hasPrimarySelection && hasSecondarySelection,
-                 'list-secondary-selection-all': secondarySelectionType == SecondarySelectionType.All,
-                 'list-primary-selection-border-only': hasPrimarySelection && !hasSecondarySelection}">
+     [ngClass]="{'no-hover': !hoverVisible}">
      
      <ng-content></ng-content>
 </div>

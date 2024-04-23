@@ -1,5 +1,5 @@
-import { SelectionListBase } from "./selection-list-base";
+import { SelectableListBase } from "./selectable-list-base";
 
-export abstract class EditableListBase extends SelectionListBase {
+export abstract class EditableListBase extends SelectableListBase {
     
 }
