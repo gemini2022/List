@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, viewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ListComponent } from './list/list.component';
 import { ListItemComponent } from './list-item/list-item.component';
@@ -25,5 +25,17 @@ import { MultiselectableListItemComponent } from './multiselectable-list-item/mu
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  
+  private list = viewChild(MultiselectableListComponent);
+
+  ngOnInit() {
+    this.list()?.selectedItemEvent.subscribe((index)=> {
+      console.log(index)
+    })
+  }
+
+
+
+  trumpy() {
+    this.list()?.clearSelection();
+  }
 }

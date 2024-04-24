@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ListItemBase } from '../list-item-base';
 
 @Component({
   selector: 'list-item',
@@ -9,6 +8,9 @@ import { ListItemBase } from '../list-item-base';
   templateUrl: './list-item.component.html',
   styleUrl: './list-item.component.scss'
 })
-export class ListItemComponent extends ListItemBase {
-
+export class ListItemComponent {
+  public cursor!: string;
+  public indent!: string;
+  public itemHeight!: string;
+  public hoverVisible: boolean = false;
 }

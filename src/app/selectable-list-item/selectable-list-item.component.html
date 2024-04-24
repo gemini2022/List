@@ -3,6 +3,9 @@
      class="list-item"
      (mousedown)="onItemDown()"
      (contextmenu)="$event.preventDefault()"
+     [ngStyle]="{'cursor': cursor ? cursor : null,
+                 'padding-left': indent ? indent : null,
+                 'height': itemHeight ? itemHeight : null}"
      [ngClass]="{
                  'list-primary-selection': hasPrimarySelection && hasSecondarySelection,
                  'list-secondary-selection-all': secondarySelectionType == SecondarySelectionType.All,

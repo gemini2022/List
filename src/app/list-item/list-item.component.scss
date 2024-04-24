@@ -5,10 +5,18 @@
     align-items: center;
     cursor: var(--list-cursor);
     height: var(--list-item-height);
-    border: var(--list-selection-border-width) solid transparent;
+    border: 1px solid transparent;
+    padding-left: calc(var(--list-indent));
 
-    &:hover:not(.no-hover) {
+    &:hover:not(.no-hover):not(.unselected-list-item):not(.list-primary-selection):not(.list-secondary-selection-all):not(.list-secondary-selection-top):not(.list-secondary-selection-middle):not(.list-secondary-selection-bottom) {
         --list-text-color: var(--list-hover-text-color);
         background: var(--list-hover-background-color);
     }
 }
+
+
+// .list-primary-selection {
+//     // --list-text-color: var(--list-selection-text-color);
+//     // border-color: var(--list-selection-border-color);
+//     // background: var(--list-selection-background-color);
+// }

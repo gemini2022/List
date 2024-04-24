@@ -1,5 +1,4 @@
 .list-container {
-    height: 100%;
-    overflow-y: auto;
-    position: relative;
+    font-size: var(--list-font-size);
+    font-family: var(--list-font-family);
 }

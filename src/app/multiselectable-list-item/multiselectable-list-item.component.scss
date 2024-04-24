@@ -1,52 +1,3 @@
-// .list-item {
-//     outline: none;
-//     display: flex;
-//     user-select: none;
-//     align-items: center;
-//     cursor: var(--list-cursor);
-//     height: var(--list-item-height);
-//     border: var(--list-selection-border-width) solid transparent;
-
-//     &:hover:not(.list-primary-selection):not(.list-secondary-selection-all):not(.no-hover) {
-//         --list-text-color: var(--list-hover-text-color);
-//         background: var(--list-hover-background-color);
-//     }
-// }
-
-
-
-// .list-primary-selection {
-//     --list-text-color: var(--list-selection-text-color);
-//     border-color: var(--list-selection-border-color);
-//     background: var(--list-selection-background-color);
-// }
-
-
-
-// .list-secondary-selection-all:not(.list-primary-selection) {
-//     --list-text-color: var(--list-secondary-selection-text-color);
-//     border-color: var(--list-secondary-selection-border-color);
-//     background: var(--list-secondary-selection-background-color);
-// }
-
-
-
-// .list-primary-selection-border-only {
-//     --list-text-color: var(--list-hover-text-color);
-//     border-color: var(--list-selection-border-color);
-// }
-
-
-
-// .list-item {
-//     &:hover:not(.unselected-list-item):not(.list-primary-selection):not(.list-secondary-selection-all):not(.list-secondary-selection-top):not(.list-secondary-selection-middle):not(.list-secondary-selection-bottom) {
-//         --list-text-color: var(--list-hover-text-color);
-//         background: var(--list-hover-background-color);
-//     }
-// }
-
-
-
 .unselected-list-item:not(.list-primary-selection) {
     color: var(--list-text-color);
     border-color: var(--list-selection-border-color);
@@ -62,7 +13,7 @@
 .list-secondary-selection-top:not(.list-primary-selection) {
     border-bottom: hidden;
     color: var(--list-secondary-selection-text-color);
-    padding-bottom: var(--list-selection-border-width);
+    padding-bottom: 1px;
     border-color: var(--list-secondary-selection-border-color);
     background: var(--list-secondary-selection-background-color);
 }
@@ -72,9 +23,9 @@
 .list-secondary-selection-middle:not(.list-primary-selection) {
     border-top: hidden;
     border-bottom: hidden;
-    padding-top: var(--list-selection-border-width);
+    padding-top: 1px;
     color: var(--list-secondary-selection-text-color);
-    padding-bottom: var(--list-selection-border-width);
+    padding-bottom: 1px;
     border-color: var(--list-secondary-selection-border-color);
     background: var(--list-secondary-selection-background-color);
 }
@@ -83,7 +34,7 @@
 
 .list-secondary-selection-bottom:not(.list-primary-selection) {
     border-top: hidden;
-    padding-top: var(--list-selection-border-width);
+    padding-top: 1px;
     color: var(--list-secondary-selection-text-color);
     border-color: var(--list-secondary-selection-border-color);
     background: var(--list-secondary-selection-background-color);
