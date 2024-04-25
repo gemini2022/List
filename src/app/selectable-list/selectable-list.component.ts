@@ -151,7 +151,7 @@ export class SelectableListComponent extends ListComponent {
 
 
 
-    private onArrowKey(e: KeyboardEvent, direction: number): void {
+    protected onArrowKey(e: KeyboardEvent, direction: number): void {
         e.preventDefault();
         const currentSelectedItem = this.items().find(x => x.hasPrimarySelection);
         if (currentSelectedItem) this.selectItemOnArrowKey(currentSelectedItem, direction);
@@ -159,7 +159,7 @@ export class SelectableListComponent extends ListComponent {
 
 
 
-    private selectItemOnArrowKey(currentSelectedItem: SelectableListItemComponent, direction: number) {
+    protected selectItemOnArrowKey(currentSelectedItem: SelectableListItemComponent, direction: number) {
         const currentSelectedItemIndex = this.items().indexOf(currentSelectedItem);
         const nextIndex = this.loopSelection() ? (currentSelectedItemIndex + direction + this.items().length) % this.items().length : currentSelectedItemIndex + direction;
         if (this.noSelectOnArrowKey()) {

@@ -1,0 +1,6 @@
+.list-item-text {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: var(--list-text-color);
+}

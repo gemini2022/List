@@ -9,6 +9,7 @@ import { MultiselectableListComponent } from './multiselectable-list/multiselect
 import { MultiselectableListItemComponent } from './multiselectable-list-item/multiselectable-list-item.component';
 import { EditableListComponent } from './editable-list/editable-list.component';
 import { EditableListItemComponent } from './editable-list-item/editable-list-item.component';
+import { EditableListItemTextComponent } from './editable-list-item-text/editable-list-item-text.component';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,8 @@ import { EditableListItemComponent } from './editable-list-item/editable-list-it
     MultiselectableListComponent,
     MultiselectableListItemComponent,
     EditableListComponent,
-    EditableListItemComponent
+    EditableListItemComponent,
+    EditableListItemTextComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

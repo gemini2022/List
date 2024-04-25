@@ -136,6 +136,14 @@ export class MultiselectableListComponent extends SelectableListComponent {
 
 
 
+  protected override onArrowKey(e: KeyboardEvent, direction: number): void {
+    e.preventDefault();
+    const currentSelectedItem = this.items().find(x => x.hasPrimarySelection || x.hasUnselection);
+    if (currentSelectedItem) this.selectItemOnArrowKey(currentSelectedItem, direction);
+  }
+
+
+
   protected override removeEventListeners() {
     super.removeEventListeners();
     if (this.removeKeyupListener) this.removeKeyupListener();
