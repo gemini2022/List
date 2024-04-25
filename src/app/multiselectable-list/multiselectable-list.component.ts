@@ -11,25 +11,32 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./../list/list.component.scss', './multiselectable-list.component.scss']
 })
 export class MultiselectableListComponent extends SelectableListComponent {
+  private keyDown: boolean = false;
   private ctrlKeyDown: boolean = false;
   private shiftKeyDown: boolean = false;
   private removeKeyupListener!: () => void;
-  public selectedItemsEvent = output<Array<number>>();
+  public itemsSelectedEvent = output<Array<number>>();
   protected override items = contentChildren(MultiselectableListItemComponent);
 
 
-  protected override addEventListeners(): void {
-    super.addEventListeners();
-    this.removeKeyupListener = this.renderer.listen('window', 'keyup', (e: KeyboardEvent) => this.onKeyUp(e));
+  protected override onItemRightClick(item: MultiselectableListItemComponent): void {
+    this.ctrlKeyDown = false;
+    this.shiftKeyDown = false;
+    super.onItemRightClick(item);
   }
 
 
 
   protected override onKeyDown(e: KeyboardEvent): void {
     super.onKeyDown(e);
+
     switch (e.key) {
       case 'Shift': case 'Control':
-        e.key == 'Shift' ? this.shiftKeyDown = true : this.ctrlKeyDown = true;
+        if (!this.keyDown) {
+          this.keyDown = true;
+          e.key == 'Shift' ? this.shiftKeyDown = true : this.ctrlKeyDown = true;
+          this.removeKeyupListener = this.renderer.listen('window', 'keyup', (e: KeyboardEvent) => this.onKeyUp(e));
+        }
         break;
     }
   }
@@ -39,6 +46,8 @@ export class MultiselectableListComponent extends SelectableListComponent {
   private onKeyUp(e: KeyboardEvent): void {
     switch (e.key) {
       case 'Shift': case 'Control':
+        this.keyDown = false;
+        this.removeKeyupListener();
         e.key == 'Shift' ? this.shiftKeyDown = false : this.ctrlKeyDown = false;
         break;
     }
@@ -80,7 +89,7 @@ export class MultiselectableListComponent extends SelectableListComponent {
       const itemComponent = this.items()[i];
       if (itemComponent !== undefined) itemComponent.hasSecondarySelection = true;
     }
-    this.selectedItemsEvent.emit(selectedItems);
+    this.itemsSelectedEvent.emit(selectedItems);
     item.hasPrimarySelection = true;
   }
 
@@ -97,7 +106,7 @@ export class MultiselectableListComponent extends SelectableListComponent {
     item.hasUnselection = item.hasSecondarySelection;
     item.hasPrimarySelection = !item.hasSecondarySelection;
     item.hasSecondarySelection = !item.hasUnselection;
-    this.selectedItemsEvent.emit([this.items().indexOf(item)]);
+    this.itemsSelectedEvent.emit([this.items().indexOf(item)]);
   }
 
 
@@ -121,8 +130,14 @@ export class MultiselectableListComponent extends SelectableListComponent {
 
 
 
-  protected override ngOnDestroy(): void {
-    super.ngOnDestroy();
+  protected override updatePrimarySelection(item: MultiselectableListItemComponent, hasPrimarySelectionBorderOnly: boolean): void {
+    if (!(this.itemRightClicked && item.hasSecondarySelection)) super.updatePrimarySelection(item, hasPrimarySelectionBorderOnly);
+  }
+
+
+
+  protected override removeEventListeners() {
+    super.removeEventListeners();
     if (this.removeKeyupListener) this.removeKeyupListener();
   }
 }

@@ -1,15 +1,15 @@
 .list-primary-selection {
-    --list-text-color: var(--list-selection-text-color);
     border-color: var(--list-selection-border-color);
     background: var(--list-selection-background-color);
+    --list-text-color: var(--list-selection-text-color);
 }
 
 
 
 .list-secondary-selection-all:not(.list-primary-selection) {
-    --list-text-color: var(--list-secondary-selection-text-color);
     border-color: var(--list-secondary-selection-border-color);
     background: var(--list-secondary-selection-background-color);
+    --list-text-color: var(--list-secondary-selection-text-color);
 }
 
 

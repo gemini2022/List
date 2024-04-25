@@ -7,6 +7,8 @@ import { SelectableListComponent } from './selectable-list/selectable-list.compo
 import { SelectableListItemComponent } from './selectable-list-item/selectable-list-item.component';
 import { MultiselectableListComponent } from './multiselectable-list/multiselectable-list.component';
 import { MultiselectableListItemComponent } from './multiselectable-list-item/multiselectable-list-item.component';
+import { EditableListComponent } from './editable-list/editable-list.component';
+import { EditableListItemComponent } from './editable-list-item/editable-list-item.component';
 
 @Component({
   selector: 'app-root',
@@ -19,16 +21,18 @@ import { MultiselectableListItemComponent } from './multiselectable-list-item/mu
     SelectableListComponent,
     SelectableListItemComponent,
     MultiselectableListComponent,
-    MultiselectableListItemComponent
+    MultiselectableListItemComponent,
+    EditableListComponent,
+    EditableListItemComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  private list = viewChild(MultiselectableListComponent);
+  private list = viewChild(SelectableListComponent);
 
   ngOnInit() {
-    this.list()?.selectedItemEvent.subscribe((index)=> {
+    this.list()?.itemNonSelectedOnArrowKeyEvent.subscribe((index)=> {
       console.log(index)
     })
   }

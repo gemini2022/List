@@ -12,12 +12,15 @@ import { CommonModule } from '@angular/common';
     styleUrls: ['./../list/list.component.scss', './selectable-list.component.scss']
 })
 export class SelectableListComponent extends ListComponent {
+    protected itemRightClicked!: boolean;
     protected renderer = inject(Renderer2);
     private eventListenersAdded!: boolean;
     private removeKeydownListener!: () => void;
+    public itemSelectedEvent = output<number>();
     public selectionBorderWidth = input<string>();
+    public itemRightClickedEvent = output<number>();
+    public itemNonSelectedOnArrowKeyEvent = output<number>();
     protected override items = contentChildren(SelectableListItemComponent);
-    public selectedItemEvent = output<number>();
     public loopSelection = input(false, { transform: (value: boolean | string) => typeof value === 'string' ? value === '' : value });
     public multiselectable = input(false, { transform: (value: boolean | string) => typeof value === 'string' ? value === '' : value });
     public noSelectOnArrowKey = input(false, { transform: (value: boolean | string) => typeof value === 'string' ? value === '' : value });
@@ -27,18 +30,35 @@ export class SelectableListComponent extends ListComponent {
         super();
         effect(() => {
             this.items().forEach((item) => {
-                this.setItemMousedownSubscription(item);
+                this.addItemMousedownSubscription(item);
+                this.addItemRightClickSubscription(item);
             })
         })
     }
 
 
 
-    private setItemMousedownSubscription(item: SelectableListItemComponent): void {
+    private addItemMousedownSubscription(item: SelectableListItemComponent): void {
         if (item.mousedownSubscription) item.mousedownSubscription.unsubscribe();
         item.mousedownSubscription = item.mousedownEvent.subscribe((item: SelectableListItemComponent) => {
             this.selectItem(this.items().indexOf(item));
         })
+    }
+
+
+
+    private addItemRightClickSubscription(item: SelectableListItemComponent): void {
+        if (item.rightClickSubscription) item.rightClickSubscription.unsubscribe();
+        item.rightClickSubscription = item.rightClickEvent.subscribe((item: SelectableListItemComponent) => {
+            this.onItemRightClick(item);
+        })
+    }
+
+
+
+    protected onItemRightClick(item: SelectableListItemComponent): void {
+        this.itemRightClicked = true;
+        this.selectItem(this.items().indexOf(item));
     }
 
 
@@ -52,7 +72,7 @@ export class SelectableListComponent extends ListComponent {
 
 
 
-    protected addEventListeners(): void {
+    private addEventListeners(): void {
         if (this.eventListenersAdded) return;
         this.eventListenersAdded = true;
         this.removeKeydownListener = this.renderer.listen('window', 'keydown', (e: KeyboardEvent) => this.onKeyDown(e));
@@ -68,13 +88,19 @@ export class SelectableListComponent extends ListComponent {
 
 
     protected onItemSelectionUsingNoModifierKey(item: SelectableListItemComponent): void {
-        this.initializeItems(item.hasPrimarySelectionBorderOnly);
-        item.hasPrimarySelection = true;
+        this.updatePrimarySelection(item, item.hasPrimarySelectionBorderOnly);
         if (!item.hasPrimarySelectionBorderOnly) {
             item.hasSecondarySelection = true;
-            this.selectedItemEvent.emit(this.items().indexOf(item));
+            if (this.itemRightClicked) {
+                this.itemRightClicked = false;
+                this.itemRightClickedEvent.emit(this.items().indexOf(item));
+            } else {
+                this.itemSelectedEvent.emit(this.items().indexOf(item));
+            }
+
         } else {
             item.hasPrimarySelectionBorderOnly = false;
+            this.itemNonSelectedOnArrowKeyEvent.emit(this.items().indexOf(item));
         }
     }
 
@@ -108,13 +134,14 @@ export class SelectableListComponent extends ListComponent {
 
 
 
-    private initializeItems(primarySelectedItemIsBorderOnly?: boolean): void {
-        this.items().forEach(item => item.clearSelection(primarySelectedItemIsBorderOnly));
+    protected updatePrimarySelection(item: SelectableListItemComponent, hasPrimarySelectionBorderOnly: boolean): void {
+        this.items().forEach(item => item.clearSelection(hasPrimarySelectionBorderOnly));
+        item.hasPrimarySelection = true;
     }
 
 
 
-    private onEnter(e: KeyboardEvent): void {
+    protected onEnter(e: KeyboardEvent): void {
         e.preventDefault();
         const itemHasPrimarySelectionBorderOnly = this.items().find(item => item.hasPrimarySelection && !item.hasSecondarySelection);
         if (itemHasPrimarySelectionBorderOnly) {
@@ -135,7 +162,6 @@ export class SelectableListComponent extends ListComponent {
     private selectItemOnArrowKey(currentSelectedItem: SelectableListItemComponent, direction: number) {
         const currentSelectedItemIndex = this.items().indexOf(currentSelectedItem);
         const nextIndex = this.loopSelection() ? (currentSelectedItemIndex + direction + this.items().length) % this.items().length : currentSelectedItemIndex + direction;
-
         if (this.noSelectOnArrowKey()) {
             const nextItem = this.items()[nextIndex];
             if (nextItem) nextItem.hasPrimarySelectionBorderOnly = true;
@@ -147,11 +173,29 @@ export class SelectableListComponent extends ListComponent {
 
     public clearSelection() {
         this.items().forEach(item => item.clearSelection());
+        this.removeEventListeners();
+    }
+
+
+
+    protected removeEventListeners() {
+        this.eventListenersAdded = false;
+        if (this.removeKeydownListener) this.removeKeydownListener();
+    }
+
+
+
+    private removeSubscriptions() {
+        this.items().forEach((item) => {
+            if (item.mousedownSubscription) item.mousedownSubscription.unsubscribe();
+            if (item.rightClickSubscription) item.rightClickSubscription.unsubscribe();
+        })
     }
 
 
 
     protected ngOnDestroy(): void {
-        if (this.removeKeydownListener) this.removeKeydownListener();
+        this.removeEventListeners();
+        this.removeSubscriptions();
     }
 }

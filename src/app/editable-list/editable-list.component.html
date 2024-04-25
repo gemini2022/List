@@ -1,0 +1,7 @@
+<div class="list-container"
+     [ngStyle]="{'width': width() ? width() : null,
+                 'height': height() ? height() : null,
+                 'font-size': fontSize() ? fontSize() : null,
+                 'font-family': fontFamily() ? fontFamily() : null}">
+    <ng-content></ng-content>
+</div>

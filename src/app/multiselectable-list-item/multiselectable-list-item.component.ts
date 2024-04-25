@@ -47,8 +47,8 @@ export class MultiselectableListItemComponent extends SelectableListItemComponen
 
 
 
-  public override clearSelection() {
-    super.clearSelection();
+  public override clearSelection(primarySelectedItemIsBorderOnly?: boolean) {
+    super.clearSelection(primarySelectedItemIsBorderOnly);
     this.isPivot = false;
     this.hasUnselection = false;
   }

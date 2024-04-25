@@ -14,15 +14,21 @@ export class SelectableListItemComponent extends ListItemComponent {
   public hasPrimarySelection: boolean = false;
   public hasSecondarySelection: boolean = false;
   public mousedownSubscription!: OutputRefSubscription;
+  public rightClickSubscription!: OutputRefSubscription;
   public hasPrimarySelectionBorderOnly: boolean = false;
   public SecondarySelectionType = SecondarySelectionType;
   public mousedownEvent = output<SelectableListItemComponent>();
+  public rightClickEvent = output<SelectableListItemComponent>();
   public htmlElement = viewChild<ElementRef<HTMLElement>>('htmlElement');
   public secondarySelectionType: SecondarySelectionType | undefined | null;
 
 
-  protected onItemDown() {
-    this.mousedownEvent.emit(this);
+  protected onItemDown(e: MouseEvent) {
+    if (e.button == 2) {
+      this.rightClickEvent.emit(this);
+    }else {
+      this.mousedownEvent.emit(this);
+    }
   }
 
 
