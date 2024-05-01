@@ -31,17 +31,20 @@ import { EditableListItemTextComponent } from './editable-list-item-text/editabl
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  private list = viewChild(SelectableListComponent);
-
-  ngOnInit() {
-    this.list()?.itemNonSelectedOnArrowKeyEvent.subscribe((index)=> {
-      console.log(index)
-    })
-  }
+  protected listComponent = viewChild(SelectableListComponent);
+  protected list: Array<string> = ['Make', 'America', 'Great', 'Again']
 
 
+  // ngOnInit() {
+  //   this.listComponent()?.textInputedEvent.subscribe((text)=> {
+  //     console.log(text)
+  //   })
+  // }
 
-  trumpy() {
-    this.list()?.clearSelection();
+
+
+  EditItem() {
+    this.listComponent()?.preventListFromUnselectingOnMouseDown(true);
+    // this.list.push('trumpy')
   }
 }

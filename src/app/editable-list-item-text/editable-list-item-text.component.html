@@ -1,13 +1,8 @@
 <div #htmlTextElement
-class="list-item-text"
-
+     class="list-item-text"
+     [contentEditable]="inEditMode === true"
+     (contextmenu)="$event.preventDefault(); onRightClick()"
+     (input)="inputedEvent.emit(htmlTextElement.innerText)"
+     paste (pastedEvent)="inputedEvent.emit(htmlTextElement.innerText)"
+     [ngClass]="{'edited-item-text': inEditMode, 'alerted-item-text': inAlertMode}"
 ><ng-content></ng-content></div>
-
-
-<!-- (paste)="onPaste($event)"
-(keydown)="getTextCaretPosition()"
-(mouseup)="getTextCaretPosition()"
-(mousedown)="getTextCaretPosition()"
-[contentEditable]="inEditMode == true"
-(input)="onInput.emit(itemTextElement.innerText)"
-[ngClass]="{'edited-item-text': inEditMode, 'alerted-item-text': inAlertMode}" -->

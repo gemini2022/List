@@ -1,5 +1,5 @@
 import { Component, ElementRef, OutputRefSubscription, output, viewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, KeyValue } from '@angular/common';
 import { ListItemComponent } from '../list-item/list-item.component';
 import { SecondarySelectionType } from '../secondary-selection-type';
 
@@ -13,25 +13,27 @@ import { SecondarySelectionType } from '../secondary-selection-type';
 export class SelectableListItemComponent extends ListItemComponent {
   public hasPrimarySelection: boolean = false;
   public hasSecondarySelection: boolean = false;
-  public mousedownSubscription!: OutputRefSubscription;
+  public clickSubscription!: OutputRefSubscription;
+  public stopMouseDownPropagation: boolean = false;
+  public mouseDownSubscription!: OutputRefSubscription;
   public rightClickSubscription!: OutputRefSubscription;
   public hasPrimarySelectionBorderOnly: boolean = false;
+  public doubleClickSubscription!: OutputRefSubscription;
   public SecondarySelectionType = SecondarySelectionType;
-  public mousedownEvent = output<SelectableListItemComponent>();
-  public rightClickEvent = output<SelectableListItemComponent>();
+  public clickedEvent = output<SelectableListItemComponent>();
+  public rightClickedEvent = output<SelectableListItemComponent>();
+  public doubleClickedEvent = output<SelectableListItemComponent>();
   public htmlElement = viewChild<ElementRef<HTMLElement>>('htmlElement');
   public secondarySelectionType: SecondarySelectionType | undefined | null;
+  public mouseDownedEvent = output<KeyValue<SelectableListItemComponent, boolean>>();
 
 
-  protected onItemDown(e: MouseEvent) {
-    if (e.button == 2) {
-      this.rightClickEvent.emit(this);
-    }else {
-      this.mousedownEvent.emit(this);
-    }
+  protected onMouseDown(e: MouseEvent) {
+    this.stopMouseDownPropagation = true;
+    this.mouseDownedEvent.emit({ key: this, value: e.button === 2 });
   }
 
-
+  
 
   public clearSelection(primarySelectedItemIsBorderOnly?: boolean) {
     this.hasPrimarySelection = false;

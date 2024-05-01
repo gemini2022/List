@@ -1,36 +1,35 @@
-$list-indent: 5px;
 $list-cursor: auto;
 $list-font-size: 14px;
 $list-item-height: 26px;
+$list-padding-left: 0px;
+$list-padding-right: 0px;
 $list-disabled-opacity: 0.25;
 $list-item-padding-top-bottom: 3px;
 $list-font-family: Arial, Helvetica, sans-serif;
 
-$list-text-color: #a0a0a0;
-$list-hover-text-color: #d2d2d2;
-$list-selection-text-color: rgb(255, 255, 255);
-$list-edited-item-text-color: #cccccc;
+$list-text-color: #000000;
+$list-hover-text-color: #000000;
+$list-selection-text-color: #000000;
+$list-edited-item-text-color: #000000;
+$list-edited-item-border-color: #000000;
 $list-alerted-item-border-color: #be1100;
-$list-edited-item-background-color: #2b2b2b;
-$list-secondary-selection-text-color: #d2d2d2;
-$list-hover-background-color: rgba(0, 0, 0, 0.03);
-$list-selection-border-color: rgba(0, 0, 0, 0.199);
-$list-edited-item-border-color: rgba(0, 0, 0, 0.25);
-$list-selection-background-color: rgba(0, 0, 0, 0.1);
-$list-secondary-selection-border-color: rgba(0, 0, 0, 0.25);
-$list-secondary-selection-background-color: rgba(0, 0, 0, 0.05);
-
-
-
+$list-edited-item-background-color: #ffffff;
+$list-secondary-selection-text-color: #000000;
+$list-selection-border-color: rgba(0, 140, 255, 0.3);
+$list-hover-background-color: rgba(0, 140, 255, 0.03);
+$list-selection-background-color: rgba(0, 140, 255, 0.1);
+$list-secondary-selection-border-color: rgba(0, 140, 255, 0.25);
+$list-secondary-selection-background-color: rgba(0, 140, 255, 0.05);
 
 
 
 :root {
-    --list-indent: #{$list-indent};
     --list-cursor: #{$list-cursor};
     --list-font-size: #{$list-font-size};
     --list-font-family: #{$list-font-family};
     --list-item-height: #{$list-item-height};
+    --list-padding-left: #{$list-padding-left};
+    --list-padding-right: #{$list-padding-right};
     --list-disabled-opacity: #{$list-disabled-opacity};
     --list-item-padding-top-bottom: #{$list-item-padding-top-bottom};
 
@@ -48,25 +47,3 @@ $list-secondary-selection-background-color: rgba(0, 0, 0, 0.05);
     --list-secondary-selection-border-color: #{$list-secondary-selection-border-color};
     --list-secondary-selection-background-color: #{$list-secondary-selection-background-color};
 }
-
-// --- List --- \\
-
-// indent
-// fontSize
-// cursor
-// itemHeight 
-// scrollSnapping
-// fontFamily
-
-
-
-// --- Selection List --- \\
-
-// loopSelection
-// selectionBorderWidth
-// multiselectable
-// noSelectOnArrowKey
-
-
-
-// --- Editable List --- \\

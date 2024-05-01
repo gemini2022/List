@@ -1,4 +1,4 @@
-<button (click)="trumpy()">Click Me!</button>
+<button (click)="EditItem()" (mousedown)="listComponent()?.stopMouseDownPropagation()">Edit Item</button>
 
 <!-- <list>
     <list-item>
@@ -58,7 +58,8 @@
 
 
 
-<editable-list>
+
+<!-- <editable-list>
     <editable-list-item>
         <editable-list-item-text>Make</editable-list-item-text>
     </editable-list-item>
@@ -74,4 +75,15 @@
     <editable-list-item>
         <editable-list-item-text>Again</editable-list-item-text>
     </editable-list-item>
-</editable-list>
+</editable-list> -->
+
+
+
+    <editable-list>
+        @for (item of list; track $index) {
+            <editable-list-item>
+                <editable-list-item-text>{{item}}</editable-list-item-text>
+            </editable-list-item>
+        }
+    </editable-list>
+

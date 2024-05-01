@@ -3,8 +3,9 @@
      (contextmenu)="$event.preventDefault()"
      [ngClass]="{'no-hover': !hoverVisible}"
      [ngStyle]="{'cursor': cursor ? cursor : null,
-                 'padding-left': indent ? indent : null,
-                 'height': itemHeight ? itemHeight : null}">
+                 'height': itemHeight ? itemHeight : null,
+                 'padding-left': paddingLeft ? paddingLeft : null,
+                 'padding-right': paddingRight ? paddingRight : null}">
      
      <ng-content></ng-content>
 </div>

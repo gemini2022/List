@@ -10,7 +10,8 @@ import { Component } from '@angular/core';
 })
 export class ListItemComponent {
   public cursor!: string;
-  public indent!: string;
   public itemHeight!: string;
+  public paddingLeft!: string;
+  public paddingRight!: string;
   public hoverVisible: boolean = false;
 }

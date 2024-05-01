@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, contentChild } from '@angular/core';
 import { MultiselectableListItemComponent } from '../multiselectable-list-item/multiselectable-list-item.component';
+import { EditableListItemTextComponent } from '../editable-list-item-text/editable-list-item-text.component';
 
 @Component({
   selector: 'editable-list-item',
@@ -11,31 +12,17 @@ import { MultiselectableListItemComponent } from '../multiselectable-list-item/m
 })
 export class EditableListItemComponent extends MultiselectableListItemComponent {
   public inEditMode: boolean = false;
+  private itemText = contentChild(EditableListItemTextComponent);
 
 
-  protected override onItemDown(e: MouseEvent) {
-    if (!this.inEditMode) super.onItemDown(e);
+  public getItemText(): EditableListItemTextComponent {
+    return this.itemText()!;
   }
 
 
 
-  // public exitEditMode(exitEditOnEscape: boolean): void {
-  //   if (this.htmlElement()!.nativeElement.innerText.trim().length > 0) {
-  //     exitEditOnEscape ? this.cancelItemEdit() : this.completeItemEdit();
-  //   } else if (exitEditOnEscape) {
-  //     this.cancelItemEdit();
-  //   }
-  // }
-
-
-
-  // private cancelItemEdit(): void {
-
-  // }
-
-
-
-  // private completeItemEdit(): void {
-
-  // }
+  public setEditMode(inEditMode: boolean, exitOnEscapeKey?: boolean): void {
+    this.inEditMode = inEditMode;
+    this.itemText()?.setEditMode(inEditMode, exitOnEscapeKey);
+  }
 }

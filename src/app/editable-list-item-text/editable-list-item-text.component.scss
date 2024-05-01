@@ -1,6 +1,10 @@
-.list-item-text {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    color: var(--list-text-color);
+.edited-item-text {
+    min-width: 40px;
+    outline-offset: -2px;
+    text-overflow: unset;
+    color: var(--list-edited-item-text-color);
+    line-height: calc(var(--list-item-height) - 6px);
+    border-color: var(--list-edited-item-border-color);
+    background: var(--list-edited-item-background-color);
+    outline: 1px solid var(--list-edited-item-background-color);
 }

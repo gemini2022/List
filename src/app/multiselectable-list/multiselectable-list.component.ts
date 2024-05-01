@@ -11,33 +11,34 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./../list/list.component.scss', './multiselectable-list.component.scss']
 })
 export class MultiselectableListComponent extends SelectableListComponent {
+  // Output
+  public itemsSelectedEvent = output<Array<number>>();
+
+  // Private
   private keyDown: boolean = false;
   private ctrlKeyDown: boolean = false;
   private shiftKeyDown: boolean = false;
   private removeKeyupListener!: () => void;
-  public itemsSelectedEvent = output<Array<number>>();
   protected override items = contentChildren(MultiselectableListItemComponent);
 
 
-  protected override onItemRightClick(item: MultiselectableListItemComponent): void {
-    this.ctrlKeyDown = false;
-    this.shiftKeyDown = false;
-    super.onItemRightClick(item);
+  
+  protected override onKeyDown(e: KeyboardEvent): void {
+    super.onKeyDown(e);
+    switch (e.key) {
+      case 'Shift': case 'Control':
+        this.onShiftAndControlKeys(e);
+        break;
+    }
   }
 
 
 
-  protected override onKeyDown(e: KeyboardEvent): void {
-    super.onKeyDown(e);
-
-    switch (e.key) {
-      case 'Shift': case 'Control':
-        if (!this.keyDown) {
-          this.keyDown = true;
-          e.key == 'Shift' ? this.shiftKeyDown = true : this.ctrlKeyDown = true;
-          this.removeKeyupListener = this.renderer.listen('window', 'keyup', (e: KeyboardEvent) => this.onKeyUp(e));
-        }
-        break;
+  protected onShiftAndControlKeys(e: KeyboardEvent) {
+    if (!this.keyDown) {
+      this.keyDown = true;
+      e.key == 'Shift' ? this.shiftKeyDown = true : this.ctrlKeyDown = true;
+      this.removeKeyupListener = this.renderer.listen('window', 'keyup', (e: KeyboardEvent) => this.onKeyUp(e));
     }
   }
 
@@ -56,9 +57,9 @@ export class MultiselectableListComponent extends SelectableListComponent {
 
 
   protected override setSelectedItems(item: MultiselectableListItemComponent): void {
-    if (this.shiftKeyDown) {
+    if (this.shiftKeyDown && !this.itemRightMouseDown) {
       this.onItemSelectionUsingShiftKey(item);
-    } else if (this.ctrlKeyDown) {
+    } else if (this.ctrlKeyDown && !this.itemRightMouseDown) {
       this.onItemSelectionUsingCtrlKey(item);
     } else {
       this.onItemSelectionUsingNoModifierKey(item);
@@ -91,6 +92,7 @@ export class MultiselectableListComponent extends SelectableListComponent {
     }
     this.itemsSelectedEvent.emit(selectedItems);
     item.hasPrimarySelection = true;
+    this.currentSelectedItem = item;
   }
 
 
@@ -107,6 +109,7 @@ export class MultiselectableListComponent extends SelectableListComponent {
     item.hasPrimarySelection = !item.hasSecondarySelection;
     item.hasSecondarySelection = !item.hasUnselection;
     this.itemsSelectedEvent.emit([this.items().indexOf(item)]);
+    this.currentSelectedItem = item;
   }
 
 
@@ -118,7 +121,7 @@ export class MultiselectableListComponent extends SelectableListComponent {
 
 
 
-  protected override setSecondarySelectionType(): void {
+  private setSecondarySelectionType(): void {
     if (this.items().length > 1) {
       this.items()[0].setFirstItemSecondarySelectionType(this.items()[1]);
       for (let i = 1; i < this.items().length - 1; i++) {
@@ -131,15 +134,7 @@ export class MultiselectableListComponent extends SelectableListComponent {
 
 
   protected override updatePrimarySelection(item: MultiselectableListItemComponent, hasPrimarySelectionBorderOnly: boolean): void {
-    if (!(this.itemRightClicked && item.hasSecondarySelection)) super.updatePrimarySelection(item, hasPrimarySelectionBorderOnly);
-  }
-
-
-
-  protected override onArrowKey(e: KeyboardEvent, direction: number): void {
-    e.preventDefault();
-    const currentSelectedItem = this.items().find(x => x.hasPrimarySelection || x.hasUnselection);
-    if (currentSelectedItem) this.selectItemOnArrowKey(currentSelectedItem, direction);
+    if (!(this.itemRightMouseDown && item.hasSecondarySelection)) super.updatePrimarySelection(item, hasPrimarySelectionBorderOnly);
   }
 
 

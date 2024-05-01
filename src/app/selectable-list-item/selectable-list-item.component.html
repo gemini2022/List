@@ -1,11 +1,14 @@
 <div #htmlElement
      tabindex="-1"
      class="list-item"
-     (mousedown)="onItemDown($event)"
-     (contextmenu)="$event.preventDefault()"
+     (click)="clickedEvent.emit(this)"
+     (mousedown)="onMouseDown($event)"
+     (dblclick)="doubleClickedEvent.emit(this)"
+     (contextmenu)="$event.preventDefault(); rightClickedEvent.emit(this)"
      [ngStyle]="{'cursor': cursor ? cursor : null,
-                 'padding-left': indent ? indent : null,
-                 'height': itemHeight ? itemHeight : null}"
+                 'height': itemHeight ? itemHeight : null,
+                 'padding-left': paddingLeft ? paddingLeft : null,
+                 'padding-right': paddingRight ? paddingRight : null}"
      [ngClass]="{
                  'list-primary-selection': hasPrimarySelection && hasSecondarySelection,
                  'list-secondary-selection-all': secondarySelectionType == SecondarySelectionType.All,
