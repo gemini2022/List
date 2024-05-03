@@ -1,0 +1,33 @@
+.header-column {
+    font-size: 13px;
+    overflow: hidden;
+    color: #000000;
+    font-weight: bold;
+    line-height: 27px;
+    position: absolute;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    // background: #0e2335;
+    font-family: Arial, Helvetica, sans-serif;
+    user-select: none;
+    
+}
+
+
+
+.resizer {
+    width: 21px;
+    height: 100%;
+    cursor: ew-resize;
+    position: absolute;
+
+    &::before {
+        position: absolute;
+        content: "";
+        left: 10px;
+        width: 11px;
+        height: 100%;
+        // background: #0e2335;
+        border-left: 1px solid black;
+    }
+}

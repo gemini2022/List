@@ -28,7 +28,7 @@ export class EditableListComponent extends MultiselectableListComponent {
   private _preventEditExitOnEscapeKey: boolean = false;
   private _preventEditExitOnMouseDown: boolean = false;
   protected override items = contentChildren(EditableListItemComponent);
-  
+
 
 
   protected override setItems(item: EditableListItemComponent): void {
@@ -57,6 +57,18 @@ export class EditableListComponent extends MultiselectableListComponent {
 
 
 
+  public override selectItem(itemIndex: number): void {
+    if (!this._preventEditExit && !this._preventEditExitOnMouseDown) {
+      super.selectItem(itemIndex);
+      if (this.itemInEditMode) {
+        this.itemInEditMode.stopMouseDownPropagation = false;
+        this.exitEdit();
+      }
+    }
+  }
+
+
+
   protected override onItemRightClick(item: EditableListItemComponent): void {
     if (!item.getItemText()?.stopRightClickPropagation) {
       super.onItemRightClick(item);
@@ -77,7 +89,7 @@ export class EditableListComponent extends MultiselectableListComponent {
   protected override setWindowMouseDownListener() {
     if (!this.allowListToUnselect()) {
       this.removeWindowMouseDownListener = this.renderer.listen('window', 'mousedown', (() => this.onWindowMouseDown()));
-    }else  {
+    } else {
       super.setWindowMouseDownListener();
     }
   }

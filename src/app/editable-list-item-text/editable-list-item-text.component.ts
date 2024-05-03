@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OutputRefSubscription, Renderer2, inject, output, viewChild } from '@angular/core';
+import { Component, OutputRefSubscription, output } from '@angular/core';
 import { PasteDirective } from '../paste-directive/paste.directive';
+import { ListItemTextComponent } from '../list-item-text/list-item-text.component';
 
 @Component({
   selector: 'editable-list-item-text',
@@ -9,11 +10,11 @@ import { PasteDirective } from '../paste-directive/paste.directive';
   templateUrl: './editable-list-item-text.component.html',
   styleUrls: ['./../list-item-text/list-item-text.component.scss', './editable-list-item-text.component.scss']
 })
-export class EditableListItemTextComponent {
+export class EditableListItemTextComponent extends ListItemTextComponent {
   public editExitedEvent = output();
   public rightClickedEvent = output();
   private textValueBeforeEdit!: string;
-  private renderer = inject(Renderer2);
+  
   protected inEditMode: boolean = false;
   protected inAlertMode: boolean = false;
   public inputedEvent = output<string>();
@@ -22,7 +23,7 @@ export class EditableListItemTextComponent {
   public stopRightClickPropagation: boolean = false;
   public inputSubscription!: OutputRefSubscription;
   public rightClickSubscription!: OutputRefSubscription;
-  private htmlTextElement = viewChild<ElementRef<HTMLElement>>('htmlTextElement');
+  
 
 
   public setEditMode(inEditMode: boolean, exitOnEscapeKey?: boolean): void {

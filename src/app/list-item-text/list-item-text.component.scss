@@ -1,15 +1,8 @@
-:host {
-    width: 100%;
-}
-
 .list-item-text {
-    max-width: 100%;
+    padding: 0 3px;
     overflow: hidden;
-    width: fit-content;
     white-space: nowrap;
     text-overflow: ellipsis;
     color: var(--list-text-color);
-
-    padding: 0 3px;
     border: 1px solid transparent;
 }

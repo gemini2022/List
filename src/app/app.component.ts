@@ -10,6 +10,8 @@ import { MultiselectableListItemComponent } from './multiselectable-list-item/mu
 import { EditableListComponent } from './editable-list/editable-list.component';
 import { EditableListItemComponent } from './editable-list-item/editable-list-item.component';
 import { EditableListItemTextComponent } from './editable-list-item-text/editable-list-item-text.component';
+import { ColumnsHeaderComponent } from './columns-header/columns-header.component';
+import { ResizableHeaderColumnComponent } from './resizable-header-column/resizable-header-column.component';
 
 @Component({
   selector: 'app-root',
@@ -25,26 +27,33 @@ import { EditableListItemTextComponent } from './editable-list-item-text/editabl
     MultiselectableListItemComponent,
     EditableListComponent,
     EditableListItemComponent,
-    EditableListItemTextComponent
+    EditableListItemTextComponent,
+    ColumnsHeaderComponent,
+    ResizableHeaderColumnComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  protected listComponent = viewChild(SelectableListComponent);
-  protected list: Array<string> = ['Make', 'America', 'Great', 'Again']
+  protected listComponent = viewChild(EditableListComponent);
+  protected list: Array<string> = ['Item1', 'Item2', 'Item3', 'Item4', 'Item5', 'Item6', 'Item7 sdfds sdfsdf ddtdr werwerwe werwer rtyrttr erterwer werwe', 'Item8', 'Item9', 'Item10', 'Item11', 'Item12', 'Item13', 'Item14', 'Item15', 'Item16', 'Item17', 'Item18', 'Item19', 'Item20']
 
 
-  // ngOnInit() {
-  //   this.listComponent()?.textInputedEvent.subscribe((text)=> {
-  //     console.log(text)
-  //   })
-  // }
+  ngOnInit() {
+    // setTimeout(() => {
+    //   console.log('go')
+    //   this.listComponent()?.preventEditExit(true)
+    // }, 5000);
+    
+  }
 
 
 
   EditItem() {
-    this.listComponent()?.preventListFromUnselectingOnMouseDown(true);
+    // this.listComponent()?.preventListFromUnselectingOnMouseDown(true);
     // this.list.push('trumpy')
   }
+
+
+  
 }

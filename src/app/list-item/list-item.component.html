@@ -2,10 +2,10 @@
      class="list-item"
      (contextmenu)="$event.preventDefault()"
      [ngClass]="{'no-hover': !hoverVisible}"
-     [ngStyle]="{'cursor': cursor ? cursor : null,
-                 'height': itemHeight ? itemHeight : null,
-                 'padding-left': paddingLeft ? paddingLeft : null,
-                 'padding-right': paddingRight ? paddingRight : null}">
+     [ngStyle]="{'cursor': cursor,
+                 'height': itemHeight,
+                 'padding-left': paddingLeft,
+                 'padding-right': paddingRight}">
      
      <ng-content></ng-content>
 </div>

@@ -1,0 +1,4 @@
+<div class="header-column"  [style.left.px]="left" [style.width.px]="getWidth() - 11">
+    <ng-content></ng-content>
+</div>
+<div columnResizer class="resizer" [style.left.px]="left + getWidth() - 21"></div>

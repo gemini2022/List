@@ -1,7 +1,9 @@
-<div class="list-container"
-     [ngStyle]="{'width': width() ? width() : null,
-                 'height': height() ? height() : null,
-                 'font-size': fontSize() ? fontSize() : null,
-                 'font-family': fontFamily() ? fontFamily() : null}">
+<div #list
+     class="list-container"
+     [ngStyle]="{'width': width(),
+                 'height': height(),
+                 'font-size': fontSize(),
+                 'font-family': fontFamily(),
+                 'overflow-x': verticalOverflow()}">
     <ng-content></ng-content>
 </div>

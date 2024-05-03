@@ -1,5 +1,7 @@
 .edited-item-text {
     min-width: 40px;
+    max-width: 100%;
+    width: fit-content;
     outline-offset: -2px;
     text-overflow: unset;
     color: var(--list-edited-item-text-color);

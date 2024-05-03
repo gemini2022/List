@@ -1,4 +1,4 @@
-<button (click)="EditItem()" (mousedown)="listComponent()?.stopMouseDownPropagation()">Edit Item</button>
+<!-- <button (click)="EditItem()" (mousedown)="listComponent()?.stopMouseDownPropagation()">Edit Item</button> -->
 
 <!-- <list>
     <list-item>
@@ -79,11 +79,79 @@
 
 
 
-    <editable-list>
-        @for (item of list; track $index) {
-            <editable-list-item>
-                <editable-list-item-text>{{item}}</editable-list-item-text>
-            </editable-list-item>
-        }
-    </editable-list>
+<editable-list width="300px" height="300px" allowListToUnselect verticalOverflow="auto">
+    @for (item of list; track $index) {
+        <editable-list-item>
+            <editable-list-item-text>{{item}}</editable-list-item-text>
+        </editable-list-item>
+    }
+</editable-list>
 
+
+
+
+
+
+<!-- <div style="width: 700px; height: 700px; overflow: auto; background: lightgray;">
+
+<columns-header>
+    <resizable-header-column #date initialWidth="81px">
+        Date
+    </resizable-header-column>
+
+    <resizable-header-column #transaction initialWidth="94px">
+        Transaction
+    </resizable-header-column>
+
+     <resizable-header-column #details initialWidth="225px">
+        Details
+    </resizable-header-column>
+
+   <resizable-header-column #amount initialWidth="131px">
+        Amount
+    </resizable-header-column>
+
+   <resizable-header-column #balance initialWidth="145px">
+        Balance
+    </resizable-header-column>
+</columns-header>
+
+
+
+
+
+<selectable-list>
+    <selectable-list-item>
+        <list-item-text [width]="date.width()">Make</list-item-text>
+        <list-item-text [width]="transaction.width()">How</list-item-text>
+        <list-item-text [width]="details.width()">Go</list-item-text>
+        <list-item-text [width]="amount.width()">Fox</list-item-text>
+        <list-item-text [width]="balance.width()">Don't</list-item-text>
+    </selectable-list-item>
+
+    <selectable-list-item>
+        <list-item-text [width]="date.width()">America</list-item-text>
+        <list-item-text [width]="transaction.width()">Are</list-item-text>
+        <list-item-text [width]="details.width()">Fuck</list-item-text>
+        <list-item-text [width]="amount.width()">Jumped</list-item-text>
+        <list-item-text [width]="balance.width()">Treat</list-item-text>
+    </selectable-list-item>
+
+    <selectable-list-item>
+        <list-item-text [width]="date.width()">Great</list-item-text>
+        <list-item-text [width]="transaction.width()">You</list-item-text>
+        <list-item-text [width]="details.width()">Yourself</list-item-text>
+        <list-item-text [width]="amount.width()">Over</list-item-text>
+        <list-item-text [width]="balance.width()">Me</list-item-text>
+    </selectable-list-item>
+
+    <selectable-list-item>
+        <list-item-text [width]="date.width()">Again</list-item-text>
+        <list-item-text [width]="transaction.width()">Doing</list-item-text>
+        <list-item-text [width]="details.width()">Asshole</list-item-text>
+        <list-item-text [width]="amount.width()">Dog</list-item-text>
+        <list-item-text [width]="balance.width()">Bad</list-item-text>
+    </selectable-list-item>
+</selectable-list>
+
+</div> -->

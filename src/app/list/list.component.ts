@@ -19,6 +19,7 @@ export class ListComponent {
   public fontFamily = input<string>();
   public paddingLeft = input<string>();
   public paddingRight = input<string>();
+  public verticalOverflow = input<string>();
   public hoverVisible = input(false, { transform: (value: boolean | string) => typeof value === 'string' ? value === '' : value });
 
   // Private
@@ -42,5 +43,6 @@ export class ListComponent {
     if (this.paddingLeft()) item.paddingLeft = this.paddingLeft()!;
     if (this.hoverVisible()) item.hoverVisible = this.hoverVisible();
     if (this.paddingRight()) item.paddingRight = this.paddingRight()!;
+    if (this.verticalOverflow()) item.verticalOverflow = this.verticalOverflow()!;
   }
 }

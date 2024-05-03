@@ -5,10 +5,10 @@
      (mousedown)="onMouseDown($event)"
      (dblclick)="doubleClickedEvent.emit(this)"
      (contextmenu)="$event.preventDefault(); rightClickedEvent.emit(this)"
-     [ngStyle]="{'cursor': cursor ? cursor : null,
-                 'height': itemHeight ? itemHeight : null,
-                 'padding-left': paddingLeft ? paddingLeft : null,
-                 'padding-right': paddingRight ? paddingRight : null}"
+     [ngStyle]="{'cursor': cursor,
+                 'height': itemHeight,
+                 'padding-left': paddingLeft,
+                 'padding-right': paddingRight}"
      [ngClass]="{'unselected-list-item': hasUnselection,
                  'list-primary-selection': hasPrimarySelection && hasSecondarySelection,
                  'list-primary-selection-border-only': hasPrimarySelection && !hasSecondarySelection,
