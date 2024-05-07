@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer2, contentChildren, inject, input, output, viewChild } from '@angular/core';
+import { Component, Renderer2, contentChildren, inject, input, output } from '@angular/core';
 import { ListComponent } from '../list/list.component';
 import { SelectableListItemComponent } from '../selectable-list-item/selectable-list-item.component';
 import { CommonModule, KeyValue } from '@angular/common';
@@ -13,8 +13,11 @@ import { CommonModule, KeyValue } from '@angular/common';
 export class SelectableListComponent extends ListComponent {
     // Inputs
     public loopSelection = input(false, { transform: (value: boolean | string) => typeof value === 'string' ? value === '' : value });
+    public allowItemClick = input(false, { transform: (value: boolean | string) => typeof value === 'string' ? value === '' : value });
     public noSelectOnArrowKey = input(false, { transform: (value: boolean | string) => typeof value === 'string' ? value === '' : value });
     public allowListToUnselect = input(false, { transform: (value: boolean | string) => typeof value === 'string' ? value === '' : value });
+    public allowItemRightClick = input(false, { transform: (value: boolean | string) => typeof value === 'string' ? value === '' : value });
+    public allowItemDoubleClick = input(false, { transform: (value: boolean | string) => typeof value === 'string' ? value === '' : value });
 
     // Outputs
     public itemClickedEvent = output<number>();
@@ -32,20 +35,19 @@ export class SelectableListComponent extends ListComponent {
     private removeListMouseDownListener!: () => void;
     private _preventListFromUnselecting: boolean = false;
     protected removeWindowMouseDownListener!: () => void;
-    private list = viewChild<ElementRef<HTMLElement>>('list');
     protected currentSelectedItem!: SelectableListItemComponent;
     private _preventListFromUnselectingOnEscapeKey: boolean = false;
     private _preventListFromUnselectingOnMouseDown: boolean = false;
     protected override items = contentChildren(SelectableListItemComponent);
 
 
-    
+
     protected override setItems(item: SelectableListItemComponent): void {
         super.setItems(item);
-        this.setItemClickSubscription(item);
         this.setItemMouseDownSubscription(item);
-        this.setItemRightClickSubscription(item);
-        this.setItemDoubleClickSubscription(item);
+        if (this.allowItemClick()) this.setItemClickSubscription(item);
+        if (this.allowItemRightClick()) this.setItemRightClickSubscription(item);
+        if (this.allowItemDoubleClick()) this.setItemDoubleClickSubscription(item);
     }
 
 
@@ -149,8 +151,8 @@ export class SelectableListComponent extends ListComponent {
 
 
     private onListMouseDown(e: MouseEvent): void {
-        if(e.clientX - this.list()!.nativeElement.getBoundingClientRect().left >= this.list()!.nativeElement.clientWidth) this.stopMouseDownPropagation();
-        if(e.clientY - this.list()!.nativeElement.getBoundingClientRect().top >= this.list()!.nativeElement.clientHeight) this.stopMouseDownPropagation();
+        if (e.clientX - this.list()!.nativeElement.getBoundingClientRect().left >= this.list()!.nativeElement.clientWidth) this.stopMouseDownPropagation();
+        if (e.clientY - this.list()!.nativeElement.getBoundingClientRect().top >= this.list()!.nativeElement.clientHeight) this.stopMouseDownPropagation();
     }
 
 
@@ -233,7 +235,7 @@ export class SelectableListComponent extends ListComponent {
 
 
     public stopMouseDownPropagation(): void {
-        if(this.currentSelectedItem) this.currentSelectedItem.stopMouseDownPropagation = true;
+        if (this.currentSelectedItem) this.currentSelectedItem.stopMouseDownPropagation = true;
     }
 
 
@@ -259,7 +261,7 @@ export class SelectableListComponent extends ListComponent {
     protected removeEventListeners() {
         this.eventListenersAdded = false;
         if (this.removeKeydownListener) this.removeKeydownListener();
-        if(this.removeListMouseDownListener) this.removeListMouseDownListener();
+        if (this.removeListMouseDownListener) this.removeListMouseDownListener();
         if (this.removeWindowMouseDownListener) this.removeWindowMouseDownListener();
     }
 

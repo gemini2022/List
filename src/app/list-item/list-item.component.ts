@@ -13,6 +13,5 @@ export class ListItemComponent {
   public itemHeight!: string;
   public paddingLeft!: string;
   public paddingRight!: string;
-  public verticalOverflow!: string;
   public hoverVisible: boolean = false;
 }

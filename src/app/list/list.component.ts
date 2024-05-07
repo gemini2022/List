@@ -1,4 +1,4 @@
-import { Component, contentChildren, effect, input } from '@angular/core';
+import { Component, ElementRef, contentChildren, effect, input, viewChild } from '@angular/core';
 import { ListItemComponent } from '../list-item/list-item.component';
 import { CommonModule } from '@angular/common';
 
@@ -19,11 +19,11 @@ export class ListComponent {
   public fontFamily = input<string>();
   public paddingLeft = input<string>();
   public paddingRight = input<string>();
-  public verticalOverflow = input<string>();
   public hoverVisible = input(false, { transform: (value: boolean | string) => typeof value === 'string' ? value === '' : value });
 
   // Private
   protected items = contentChildren(ListItemComponent);
+  protected list = viewChild<ElementRef<HTMLElement>>('list');
 
 
 
@@ -43,6 +43,5 @@ export class ListComponent {
     if (this.paddingLeft()) item.paddingLeft = this.paddingLeft()!;
     if (this.hoverVisible()) item.hoverVisible = this.hoverVisible();
     if (this.paddingRight()) item.paddingRight = this.paddingRight()!;
-    if (this.verticalOverflow()) item.verticalOverflow = this.verticalOverflow()!;
   }
 }

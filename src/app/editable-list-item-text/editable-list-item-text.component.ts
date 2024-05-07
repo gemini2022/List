@@ -14,14 +14,13 @@ export class EditableListItemTextComponent extends ListItemTextComponent {
   public editExitedEvent = output();
   public rightClickedEvent = output();
   private textValueBeforeEdit!: string;
-  
   protected inEditMode: boolean = false;
   protected inAlertMode: boolean = false;
   public inputedEvent = output<string>();
   private removeMouseDownListener!: () => void;
+  public inputSubscription!: OutputRefSubscription;
   public stopMouseDownPropagation: boolean = false;
   public stopRightClickPropagation: boolean = false;
-  public inputSubscription!: OutputRefSubscription;
   public rightClickSubscription!: OutputRefSubscription;
   
 
