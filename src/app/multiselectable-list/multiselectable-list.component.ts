@@ -76,7 +76,7 @@ export class MultiselectableListComponent extends SelectableListComponent {
       item.hasUnselection = false;
       item.hasPrimarySelection = false;
       item.hasSecondarySelection = false;
-      item.secondarySelectionType = null;
+      item.secondarySelectionType = null!;
     });
 
     const selectedItemIndex = this.items().indexOf(item);
@@ -102,7 +102,7 @@ export class MultiselectableListComponent extends SelectableListComponent {
       item.isPivot = false;
       item.hasUnselection = false;
       item.hasPrimarySelection = false;
-      item.secondarySelectionType = null;
+      item.secondarySelectionType = null!;
     });
     item.isPivot = true;
     item.hasUnselection = item.hasSecondarySelection;
@@ -121,7 +121,7 @@ export class MultiselectableListComponent extends SelectableListComponent {
 
 
 
-  private setSecondarySelectionType(): void {
+  protected override setSecondarySelectionType(): void {
     if (this.items().length > 1) {
       this.items()[0].setFirstItemSecondarySelectionType(this.items()[1]);
       for (let i = 1; i < this.items().length - 1; i++) {

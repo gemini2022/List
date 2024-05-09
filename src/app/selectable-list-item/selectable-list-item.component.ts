@@ -18,13 +18,13 @@ export class SelectableListItemComponent extends ListItemComponent {
   public mouseDownSubscription!: OutputRefSubscription;
   public rightClickSubscription!: OutputRefSubscription;
   public hasPrimarySelectionBorderOnly: boolean = false;
+  public secondarySelectionType!: SecondarySelectionType;
   public doubleClickSubscription!: OutputRefSubscription;
-  public SecondarySelectionType = SecondarySelectionType;
+  protected SecondarySelectionType = SecondarySelectionType;
   public clickedEvent = output<SelectableListItemComponent>();
   public rightClickedEvent = output<SelectableListItemComponent>();
   public doubleClickedEvent = output<SelectableListItemComponent>();
   public htmlElement = viewChild<ElementRef<HTMLElement>>('htmlElement');
-  public secondarySelectionType: SecondarySelectionType | undefined | null;
   public mouseDownedEvent = output<KeyValue<SelectableListItemComponent, boolean>>();
 
 
@@ -33,11 +33,11 @@ export class SelectableListItemComponent extends ListItemComponent {
     this.mouseDownedEvent.emit({ key: this, value: e.button === 2 });
   }
 
-  
+
 
   public clearSelection(primarySelectedItemIsBorderOnly?: boolean) {
     this.hasPrimarySelection = false;
-    this.secondarySelectionType = null;
+    this.secondarySelectionType = null!;
     if (!primarySelectedItemIsBorderOnly) this.hasSecondarySelection = false;
   }
 }

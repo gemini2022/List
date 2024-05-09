@@ -2,6 +2,7 @@ import { Component, Renderer2, contentChildren, inject, input, output } from '@a
 import { ListComponent } from '../list/list.component';
 import { SelectableListItemComponent } from '../selectable-list-item/selectable-list-item.component';
 import { CommonModule, KeyValue } from '@angular/common';
+import { SecondarySelectionType } from '../secondary-selection-type';
 
 @Component({
     selector: 'selectable-list',
@@ -122,6 +123,7 @@ export class SelectableListComponent extends ListComponent {
 
     protected setSelectedItems(item: SelectableListItemComponent): void {
         this.onItemSelectionUsingNoModifierKey(item);
+        this.setSecondarySelectionType();
     }
 
 
@@ -146,6 +148,18 @@ export class SelectableListComponent extends ListComponent {
             item.hasPrimarySelectionBorderOnly = false;
             this.itemNonSelectedOnArrowKeyEvent.emit(this.items().indexOf(item));
         }
+    }
+
+
+
+    protected setSecondarySelectionType(): void {
+        const firstItem = this.items()[0];
+        if (firstItem.hasSecondarySelection && !firstItem.hasPrimarySelection) firstItem.secondarySelectionType = SecondarySelectionType.All;
+        for (let i = 1; i < this.items().length - 1; i++) {
+            if (this.items()[i].hasSecondarySelection && !this.items()[i].hasPrimarySelection) this.items()[i].secondarySelectionType = SecondarySelectionType.All;
+        }
+        const lastItem = this.items()[this.items().length - 1];
+        if (lastItem.hasSecondarySelection && !lastItem.hasPrimarySelection) lastItem.secondarySelectionType = SecondarySelectionType.All;
     }
 
 
