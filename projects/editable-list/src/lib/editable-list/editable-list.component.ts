@@ -13,7 +13,7 @@ import { MultiselectableListComponent } from 'multiselectable-list';
 export class EditableListComponent extends MultiselectableListComponent {
   // Input
   public allowMultiselection = input(false, { transform: (value: boolean | string) => typeof value === 'string' ? value === '' : value });
-  public allowItemEditOnDoubleClick = input(false, { transform: (value: boolean | string) => typeof value === 'string' ? value === '' : value });
+  public disableItemEditOnDoubleClick = input(false, { transform: (value: boolean | string) => typeof value === 'string' ? value === '' : value });
 
   // Outputs
   public textInputedEvent = output<string>();
@@ -82,7 +82,7 @@ export class EditableListComponent extends MultiselectableListComponent {
 
   protected override onItemDoubleClick(item: EditableListItemComponent): void {
     super.onItemDoubleClick(item);
-    if(this.allowItemEditOnDoubleClick()) this.editSelectedItem();
+    if(!this.disableItemEditOnDoubleClick()) this.editSelectedItem();
   }
 
 
