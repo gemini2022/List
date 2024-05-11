@@ -8,6 +8,26 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
+    "paths": {
+      "editable-list": [
+        "./dist/editable-list"
+      ],
+      "list": [
+        "./dist/list"
+      ],
+      "multiselectable-list": [
+        "./dist/multiselectable-list"
+      ],
+      "paste-directive": [
+        "./dist/paste-directive"
+      ],
+      "selectable-list": [
+        "./dist/selectable-list"
+      ],
+      "trumpy": [
+        "./dist/trumpy"
+      ]
+    },
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
     "esModuleInterop": true,

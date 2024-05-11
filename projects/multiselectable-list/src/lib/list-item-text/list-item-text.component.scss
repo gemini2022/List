@@ -1,0 +1,8 @@
+.list-item-text {
+    padding: 0 3px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: var(--list-text-color);
+    border: 1px solid transparent;
+}

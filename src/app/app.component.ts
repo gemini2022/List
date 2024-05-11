@@ -1,17 +1,9 @@
 import { Component, viewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ListComponent } from './list/list.component';
-import { ListItemComponent } from './list-item/list-item.component';
-import { ListItemTextComponent } from './list-item-text/list-item-text.component';
-import { SelectableListComponent } from './selectable-list/selectable-list.component';
-import { SelectableListItemComponent } from './selectable-list-item/selectable-list-item.component';
-import { MultiselectableListComponent } from './multiselectable-list/multiselectable-list.component';
-import { MultiselectableListItemComponent } from './multiselectable-list-item/multiselectable-list-item.component';
-import { EditableListComponent } from './editable-list/editable-list.component';
-import { EditableListItemComponent } from './editable-list-item/editable-list-item.component';
-import { EditableListItemTextComponent } from './editable-list-item-text/editable-list-item-text.component';
-import { ColumnsHeaderComponent } from './columns-header/columns-header.component';
-import { ResizableHeaderColumnComponent } from './resizable-header-column/resizable-header-column.component';
+import { EditableListComponent, EditableListItemComponent, EditableListItemTextComponent } from 'editable-list';
+import { ListComponent, ListItemComponent, ListItemTextComponent } from 'list';
+import { MultiselectableListComponent, MultiselectableListItemComponent } from 'multiselectable-list';
+import { SelectableListComponent, SelectableListItemComponent } from 'selectable-list';
 
 @Component({
   selector: 'app-root',
@@ -27,9 +19,7 @@ import { ResizableHeaderColumnComponent } from './resizable-header-column/resiza
     MultiselectableListItemComponent,
     EditableListComponent,
     EditableListItemComponent,
-    EditableListItemTextComponent,
-    ColumnsHeaderComponent,
-    ResizableHeaderColumnComponent
+    EditableListItemTextComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
