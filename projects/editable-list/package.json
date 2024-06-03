@@ -2,8 +2,8 @@
   "name": "editable-list",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/common": "^17.3.0",
-    "@angular/core": "^17.3.0",
+    "@angular/common": "^18.0.1",
+    "@angular/core": "^18.0.1",
     "multiselectable-list": "^0.0.1",
     "paste-directive": "^0.0.1"
   },

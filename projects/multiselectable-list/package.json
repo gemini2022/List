@@ -2,8 +2,8 @@
   "name": "multiselectable-list",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/common": "^17.3.0",
-    "@angular/core": "^17.3.0",
+    "@angular/common": "^18.0.1",
+    "@angular/core": "^18.0.1",
     "selectable-list": "^0.0.1"
   },
   "dependencies": {
