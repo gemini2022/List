@@ -13,6 +13,7 @@
 .list-secondary-selection-top:not(.list-primary-selection) {
     padding-bottom: 1px;
     border-bottom: hidden;
+    box-sizing: border-box;
     border-color: var(--list-secondary-selection-border-color);
     background: var(--list-secondary-selection-background-color);
     --list-text-color: var(--list-secondary-selection-text-color);
@@ -25,6 +26,7 @@
     border-top: hidden;
     padding-bottom: 1px;
     border-bottom: hidden;
+    box-sizing: border-box;
     border-color: var(--list-secondary-selection-border-color);
     background: var(--list-secondary-selection-background-color);
     --list-text-color: var(--list-secondary-selection-text-color);
@@ -35,6 +37,7 @@
 .list-secondary-selection-bottom:not(.list-primary-selection) {
     padding-top: 1px;
     border-top: hidden;
+    box-sizing: border-box;
     border-color: var(--list-secondary-selection-border-color);
     background: var(--list-secondary-selection-background-color);
     --list-text-color: var(--list-secondary-selection-text-color);

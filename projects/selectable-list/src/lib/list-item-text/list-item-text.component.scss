@@ -2,6 +2,7 @@
     padding: 0 3px;
     overflow: hidden;
     white-space: nowrap;
+    box-sizing: border-box;
     text-overflow: ellipsis;
     color: var(--list-text-color);
     border: 1px solid transparent;

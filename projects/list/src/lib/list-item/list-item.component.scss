@@ -1,12 +1,14 @@
 .list-item {
     outline: none;
     display: flex;
+    padding-left: 1px;
     user-select: none;
     align-items: center;
+    box-sizing: border-box;
     cursor: var(--list-cursor);
     border: 1px solid transparent;
     height: var(--list-item-height);
-    padding-left: 1px;
+    
 
     &:hover:not(.no-hover):not(.unselected-list-item):not(.list-primary-selection):not(.list-secondary-selection-all):not(.list-secondary-selection-top):not(.list-secondary-selection-middle):not(.list-secondary-selection-bottom) {
         --list-text-color: var(--list-hover-text-color);
